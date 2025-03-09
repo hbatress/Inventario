@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deprecations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('asset_id');
-            $table->date('deprecation_date');
-            $table->text('reason');
+        Schema::create('criticality_levels', function (Blueprint $table) {
+            $table->id('CriticalityID');
+            $table->string('CriticalityName', 50)->unique();
             $table->timestamps();
-        
-            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deprecations');
+        Schema::dropIfExists('criticality_levels');
     }
 };
