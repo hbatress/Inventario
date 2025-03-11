@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contracts\CriticalityLevels\CriticalityLevelsActionInterface;
-use App\Contracts\CriticalityLevels\CriticalityLevelsQueryInterface;
 use Illuminate\Http\JsonResponse;
 
-class CriticalityLevelsController extends Controller
+class CriticalityLevelsActionController extends Controller
 {
     protected $criticalityLevelAction;
-    protected $criticalityLevelQuery;
 
-    public function __construct(CriticalityLevelsActionInterface $criticalityLevelAction, CriticalityLevelsQueryInterface $criticalityLevelQuery)
+    public function __construct(CriticalityLevelsActionInterface $criticalityLevelAction)
     {
         $this->criticalityLevelAction = $criticalityLevelAction;
-        $this->criticalityLevelQuery = $criticalityLevelQuery;
     }
 
     /**
@@ -88,41 +85,5 @@ class CriticalityLevelsController extends Controller
         list($status, $message) = $this->criticalityLevelAction->delete($id);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/digital/api/criticality-levels/{id}",
-     *     operationId="GetCriticalityLevel",
-     *     tags={"CriticalityLevels"},
-     *     summary="Get a criticality level",
-     *     description="Get details of a criticality level from the system",
-     *     @OA\Parameter (
-     *         description="Id of the criticality level",
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         example=1,
-     *         @OA\Schema (
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Data Found",
-     *         @OA\JsonContent()
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="No data found",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
-    public function show($id) : JsonResponse {
-        list($status, $data) = $this->criticalityLevelQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
     }
 }

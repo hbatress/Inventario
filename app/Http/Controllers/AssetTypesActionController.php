@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contracts\AssetTypes\AssetTypesActionInterface;
-use App\Contracts\AssetTypes\AssetTypesQueryInterface;
 use Illuminate\Http\JsonResponse;
 
-class AssetTypesController extends Controller
+class AssetTypesActionController extends Controller
 {
     protected $assetTypeAction;
-    protected $assetTypeQuery;
 
-    public function __construct(AssetTypesActionInterface $assetTypeAction, AssetTypesQueryInterface $assetTypeQuery)
+    public function __construct(AssetTypesActionInterface $assetTypeAction)
     {
         $this->assetTypeAction = $assetTypeAction;
-        $this->assetTypeQuery = $assetTypeQuery;
     }
 
     /**
@@ -88,41 +85,5 @@ class AssetTypesController extends Controller
         list($status, $message) = $this->assetTypeAction->delete($id);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/digital/api/asset-types/{id}",
-     *     operationId="GetAssetType",
-     *     tags={"AssetTypes"},
-     *     summary="Get an asset type",
-     *     description="Get details of an asset type from the system",
-     *     @OA\Parameter (
-     *         description="Id of the asset type",
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         example=1,
-     *         @OA\Schema (
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Data Found",
-     *         @OA\JsonContent()
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="No data found",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
-    public function show($id) : JsonResponse {
-        list($status, $data) = $this->assetTypeQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
     }
 }

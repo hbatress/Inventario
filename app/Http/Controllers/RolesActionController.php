@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contracts\Roles\RolesActionInterface;
-use App\Contracts\Roles\RolesQueryInterface;
 use Illuminate\Http\JsonResponse;
 
-class RolesController extends Controller
+class RolesActionController extends Controller
 {
     protected $roleAction;
-    protected $roleQuery;
 
-    public function __construct(RolesActionInterface $roleAction, RolesQueryInterface $roleQuery)
+    public function __construct(RolesActionInterface $roleAction)
     {
         $this->roleAction = $roleAction;
-        $this->roleQuery = $roleQuery;
     }
 
     /**
@@ -88,41 +85,5 @@ class RolesController extends Controller
         list($status, $message) = $this->roleAction->delete($id);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/digital/api/roles/{id}",
-     *     operationId="GetRole",
-     *     tags={"Roles"},
-     *     summary="Get a role",
-     *     description="Get details of a role from the system",
-     *     @OA\Parameter (
-     *         description="Id of the role",
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         example=1,
-     *         @OA\Schema (
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Data Found",
-     *         @OA\JsonContent()
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="No data found",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
-    public function show($id) : JsonResponse {
-        list($status, $data) = $this->roleQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
     }
 }

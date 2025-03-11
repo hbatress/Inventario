@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contracts\Locations\LocationsActionInterface;
-use App\Contracts\Locations\LocationsQueryInterface;
 use Illuminate\Http\JsonResponse;
 
-class LocationsController extends Controller
+class LocationsActionController extends Controller
 {
     protected $locationAction;
-    protected $locationQuery;
 
-    public function __construct(LocationsActionInterface $locationAction, LocationsQueryInterface $locationQuery)
+    public function __construct(LocationsActionInterface $locationAction)
     {
         $this->locationAction = $locationAction;
-        $this->locationQuery = $locationQuery;
     }
 
     /**
@@ -88,41 +85,5 @@ class LocationsController extends Controller
         list($status, $message) = $this->locationAction->delete($id);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/digital/api/locations/{id}",
-     *     operationId="GetLocation",
-     *     tags={"Locations"},
-     *     summary="Get a location",
-     *     description="Get details of a location from the system",
-     *     @OA\Parameter (
-     *         description="Id of the location",
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         example=1,
-     *         @OA\Schema (
-     *             type="integer",
-     *             format="int64"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Data Found",
-     *         @OA\JsonContent()
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="No data found",
-     *         @OA\JsonContent()
-     *     ),
-     * )
-     */
-    public function show($id) : JsonResponse {
-        list($status, $data) = $this->locationQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
     }
 }

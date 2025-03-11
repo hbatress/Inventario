@@ -1,83 +1,93 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DepartmentsController;
-use App\Http\Controllers\LocationsController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\UserRolesController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\StatusesController;
-use App\Http\Controllers\CriticalityLevelsController;
-use App\Http\Controllers\ClassificationsController;
-use App\Http\Controllers\AssetTypesController;
-use App\Http\Controllers\AssetsController;
-use App\Http\Controllers\ActionsController;
-
+use App\Http\Controllers\DepartmentsActionController;
+use App\Http\Controllers\DepartmentsQueryController;
+use App\Http\Controllers\LocationsActionController;
+use App\Http\Controllers\LocationsQueryController;
+use App\Http\Controllers\RolesActionController;
+use App\Http\Controllers\RolesQueryController;
+use App\Http\Controllers\UserRolesActionController;
+use App\Http\Controllers\UserRolesQueryController;
+use App\Http\Controllers\UsersActionController;
+use App\Http\Controllers\UsersQueryController;
+use App\Http\Controllers\StatusesActionController;
+use App\Http\Controllers\StatusesQueryController;
+use App\Http\Controllers\CriticalityLevelsActionController;
+use App\Http\Controllers\CriticalityLevelsQueryController;
+use App\Http\Controllers\ClassificationsActionController;
+use App\Http\Controllers\ClassificationsQueryController;
+use App\Http\Controllers\AssetTypesActionController;
+use App\Http\Controllers\AssetTypesQueryController;
+use App\Http\Controllers\AssetsActionController;
+use App\Http\Controllers\AssetsQueryController;
+use App\Http\Controllers\ActionsActionController;
+use App\Http\Controllers\ActionsQueryController;
 
 Route::prefix('api/')->group(function () {
     Route::prefix('departments')->group(function () {
-        Route::post('/', [DepartmentsController::class, 'store']);
-        Route::delete('/{id}', [DepartmentsController::class, 'destroy']);
-        Route::get('/{id}', [DepartmentsController::class, 'show']);
+        Route::post('/', [DepartmentsActionController::class, 'store']);
+        Route::delete('/{id}', [DepartmentsActionController::class, 'destroy']);
+        Route::get('/{id}', [DepartmentsQueryController::class, 'show']);
     });
 
     Route::prefix('locations')->group(function () {
-        Route::post('/', [LocationsController::class, 'store']);
-        Route::delete('/{id}', [LocationsController::class, 'destroy']);
-        Route::get('/{id}', [LocationsController::class, 'show']);
+        Route::post('/', [LocationsActionController::class, 'store']);
+        Route::delete('/{id}', [LocationsActionController::class, 'destroy']);
+        Route::get('/{id}', [LocationsQueryController::class, 'show']);
     });
 
     Route::prefix('roles')->group(function () {
-        Route::post('/', [RolesController::class, 'store']);
-        Route::delete('/{id}', [RolesController::class, 'destroy']);
-        Route::get('/{id}', [RolesController::class, 'show']);
+        Route::post('/', [RolesActionController::class, 'store']);
+        Route::delete('/{id}', [RolesActionController::class, 'destroy']);
+        Route::get('/{id}', [RolesQueryController::class, 'show']);
     });
 
     Route::prefix('user-roles')->group(function () {
-        Route::post('/', [UserRolesController::class, 'store']);
-        Route::delete('/{user_id}/{role_id}', [UserRolesController::class, 'destroy']);
-        Route::get('/{user_id}/{role_id}', [UserRolesController::class, 'show']);
+        Route::post('/', [UserRolesActionController::class, 'store']);
+        Route::delete('/{user_id}/{role_id}', [UserRolesActionController::class, 'destroy']);
+        Route::get('/{user_id}/{role_id}', [UserRolesQueryController::class, 'show']);
     });
 
     Route::prefix('users')->group(function () {
-        Route::post('/', [UsersController::class, 'store']);
-        Route::delete('/{id}', [UsersController::class, 'destroy']);
-        Route::get('/{id}', [UsersController::class, 'show']);
+        Route::post('/', [UsersActionController::class, 'store']);
+        Route::delete('/{id}', [UsersActionController::class, 'destroy']);
+        Route::get('/{id}', [UsersQueryController::class, 'show']);
     });
 
     Route::prefix('statuses')->group(function () {
-        Route::post('/', [StatusesController::class, 'store']);
-        Route::delete('/{id}', [StatusesController::class, 'destroy']);
-        Route::get('/{id}', [StatusesController::class, 'show']);
+        Route::post('/', [StatusesActionController::class, 'store']);
+        Route::delete('/{id}', [StatusesActionController::class, 'destroy']);
+        Route::get('/{id}', [StatusesQueryController::class, 'show']);
     });
 
     Route::prefix('criticality-levels')->group(function () {
-        Route::post('/', [CriticalityLevelsController::class, 'store']);
-        Route::delete('/{id}', [CriticalityLevelsController::class, 'destroy']);
-        Route::get('/{id}', [CriticalityLevelsController::class, 'show']);
+        Route::post('/', [CriticalityLevelsActionController::class, 'store']);
+        Route::delete('/{id}', [CriticalityLevelsActionController::class, 'destroy']);
+        Route::get('/{id}', [CriticalityLevelsQueryController::class, 'show']);
     });
 
     Route::prefix('classifications')->group(function () {
-        Route::post('/', [ClassificationsController::class, 'store']);
-        Route::delete('/{id}', [ClassificationsController::class, 'destroy']);
-        Route::get('/{id}', [ClassificationsController::class, 'show']);
+        Route::post('/', [ClassificationsActionController::class, 'store']);
+        Route::delete('/{id}', [ClassificationsActionController::class, 'destroy']);
+        Route::get('/{id}', [ClassificationsQueryController::class, 'show']);
     });
 
     Route::prefix('asset-types')->group(function () {
-        Route::post('/', [AssetTypesController::class, 'store']);
-        Route::delete('/{id}', [AssetTypesController::class, 'destroy']);
-        Route::get('/{id}', [AssetTypesController::class, 'show']);
+        Route::post('/', [AssetTypesActionController::class, 'store']);
+        Route::delete('/{id}', [AssetTypesActionController::class, 'destroy']);
+        Route::get('/{id}', [AssetTypesQueryController::class, 'show']);
     });
 
     Route::prefix('assets')->group(function () {
-        Route::post('/', [AssetsController::class, 'store']);
-        Route::delete('/{id}', [AssetsController::class, 'destroy']);
-        Route::get('/{id}', [AssetsController::class, 'show']);
+        Route::post('/', [AssetsActionController::class, 'store']);
+        Route::delete('/{id}', [AssetsActionController::class, 'destroy']);
+        Route::get('/{id}', [AssetsQueryController::class, 'show']);
     });
 
     Route::prefix('actions')->group(function () {
-        Route::post('/', [ActionsController::class, 'store']);
-        Route::delete('/{id}', [ActionsController::class, 'destroy']);
-        Route::get('/{id}', [ActionsController::class, 'show']);
+        Route::post('/', [ActionsActionController::class, 'store']);
+        Route::delete('/{id}', [ActionsActionController::class, 'destroy']);
+        Route::get('/{id}', [ActionsQueryController::class, 'show']);
     });
 });
