@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Repository\Statuses;
-
-class StatusesQueryRepository
+use App\Contracts\Statuses\StatusesQueryInterface;
+use Illuminate\Database\Eloquent\Model;
+use App\Repository\BaseRepository;
+use App\Models\Status;
+class StatusesQueryRepository  extends BaseRepository implements StatusesQueryInterface
 {
-    /**
-     * Create a new class instance.
-     */
     public function __construct()
     {
-        //
+        parent::__construct(new Status());
+    }
+    public function getAction($id){
+        return $this->model->find($id);
+    }
+    public function getActionBy($id, $column){
+        return $this->model->where($column, $id)->get();
     }
 }

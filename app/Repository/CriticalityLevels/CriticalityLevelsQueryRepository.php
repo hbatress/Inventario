@@ -1,14 +1,21 @@
 <?php
 
 namespace App\Repository\CriticalityLevels;
-
-class CriticalityLevelsQueryRepository
+use App\Contracts\CriticalityLevels\CriticalityLevelsQueryInterface;
+use Illuminate\Database\Eloquent\Model;
+use App\Repository\BaseRepository;
+use App\Models\CriticalityLevel;
+class CriticalityLevelsQueryRepository  extends BaseRepository implements CriticalityLevelsQueryInterface
 {
-    /**
-     * Create a new class instance.
-     */
     public function __construct()
     {
-        //
+        parent::__construct(new CriticalityLevel());
+    }
+
+    public function getAction($id){
+        return $this->model->find($id);
+    }
+    public function getActionBy($id, $column){
+        return $this->model->where($column, $id)->get();
     }
 }

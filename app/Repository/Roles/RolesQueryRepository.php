@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Repository\Roles;
-
-class RolesQueryRepository
+use App\Contracts\Roles\RolesQueryInterface;
+use Illuminate\Database\Eloquent\Model;
+use App\Repository\BaseRepository;
+class RolesQueryRepository  extends BaseRepository implements RolesQueryInterface
 {
-    /**
-     * Create a new class instance.
-     */
     public function __construct()
     {
-        //
+        parent::__construct(new Role());
+    }
+    public function getAction($id){
+        return $this->model->find($id);
+    }
+    public function getActionBy($id, $column){
+        return $this->model->where($column, $id)->get();
     }
 }

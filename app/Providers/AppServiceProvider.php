@@ -47,6 +47,7 @@ use App\Repository\Actions\ActionsActionRepository;
 use App\Repository\Actions\ActionsQueryRepository;
 use App\Repository\Assets\AssetsActionRepository;
 use App\Repository\Assets\AssetsQueryRepository;
+use App\Repository\BaseRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -77,6 +78,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ActionsQueryInterface::class, ActionsQueryRepository::class);
         $this->app->bind(AssetsActionInterface::class, AssetsActionRepository::class);
         $this->app->bind(AssetsQueryInterface::class, AssetsQueryRepository::class);
+
+        // Registrar el BaseRepository
+        $this->app->bind(BaseRepository::class, function ($app) {
+            return new BaseRepository($app->make(Model::class));
+        });
     }
 
     /**

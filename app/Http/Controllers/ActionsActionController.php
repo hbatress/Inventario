@@ -46,9 +46,13 @@ class ActionsActionController extends Controller
      * )
      */
     public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->actionAction->create($request->all());
-        if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        $validatedData = $request->validate([
+            'ActionName' => 'required|string|max:255',
+        ]);
+    
+        $action = $this->actionAction->create($validatedData);
+    
+        return response()->json(['status' => true, 'message' => 'Action created successfully', 'data' => $action], 201);
     }
 
     /**

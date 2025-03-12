@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Repository\AssetTypes;
-
-class AssetTypesQueryRepository
+use App\Contracts\AssetTypes\AssetTypesQueryInterface;
+use Illuminate\Database\Eloquent\Model;
+use App\Repository\BaseRepository;
+use App\Models\AssetType;
+class AssetTypesQueryRepository extends BaseRepository  implements AssetTypesQueryInterface
 {
-    /**
-     * Create a new class instance.
-     */
     public function __construct()
     {
-        //
+        parent::__construct(new AssetType());
+    }
+    public function getAction($id){
+        return $this->model->find($id);
+    }
+    public function getActionBy($id, $column){
+        return $this->model->where($column, $id)->get();
     }
 }
