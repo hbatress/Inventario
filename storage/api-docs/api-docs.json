@@ -275,47 +275,57 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "code",
-                                    "name",
-                                    "type_id",
-                                    "location_id",
-                                    "department_id",
-                                    "status_id",
-                                    "classification_id",
-                                    "criticality_id",
-                                    "action_id",
-                                    "created_by"
+                                    "Code",
+                                    "Name",
+                                    "TypeID",
+                                    "LocationID",
+                                    "DepartmentID",
+                                    "StatusID",
+                                    "ClassificationID",
+                                    "CriticalityID",
+                                    "ActionID",
+                                    "CreatedBy"
                                 ],
                                 "properties": {
-                                    "code": {
-                                        "type": "string"
+                                    "Code": {
+                                        "type": "string",
+                                        "example": "A12345"
                                     },
-                                    "name": {
-                                        "type": "string"
+                                    "Name": {
+                                        "type": "string",
+                                        "example": "Asset Name"
                                     },
-                                    "type_id": {
-                                        "type": "integer"
+                                    "TypeID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "location_id": {
-                                        "type": "integer"
+                                    "LocationID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "department_id": {
-                                        "type": "integer"
+                                    "DepartmentID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "status_id": {
-                                        "type": "integer"
+                                    "StatusID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "classification_id": {
-                                        "type": "integer"
+                                    "ClassificationID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "criticality_id": {
-                                        "type": "integer"
+                                    "CriticalityID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "action_id": {
-                                        "type": "integer"
+                                    "ActionID": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
-                                    "created_by": {
-                                        "type": "integer"
+                                    "CreatedBy": {
+                                        "type": "integer",
+                                        "example": 1
                                     }
                                 },
                                 "type": "object"
@@ -439,10 +449,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "classification_name"
+                                    "ClassificationName"
                                 ],
                                 "properties": {
-                                    "classification_name": {
+                                    "ClassificationName": {
                                         "type": "string"
                                     }
                                 },
@@ -567,10 +577,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "criticality_name"
+                                    "CriticalityName"
                                 ],
                                 "properties": {
-                                    "criticality_name": {
+                                    "CriticalityName": {
                                         "type": "string"
                                     }
                                 },
@@ -695,10 +705,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "department_name"
+                                    "DepartmentName"
                                 ],
                                 "properties": {
-                                    "department_name": {
+                                    "DepartmentName": {
                                         "type": "string"
                                     }
                                 },
@@ -823,10 +833,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "location_name"
+                                    "LocationName"
                                 ],
                                 "properties": {
-                                    "location_name": {
+                                    "LocationName": {
                                         "type": "string"
                                     }
                                 },
@@ -951,10 +961,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "role_name"
+                                    "RoleName"
                                 ],
                                 "properties": {
-                                    "role_name": {
+                                    "RoleName": {
                                         "type": "string"
                                     }
                                 },
@@ -1079,10 +1089,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "status_name"
+                                    "StatusName"
                                 ],
                                 "properties": {
-                                    "status_name": {
+                                    "StatusName": {
                                         "type": "string"
                                     }
                                 },
@@ -1207,14 +1217,14 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "user_id",
-                                    "role_id"
+                                    "UserID",
+                                    "RoleID"
                                 ],
                                 "properties": {
-                                    "user_id": {
+                                    "UserID": {
                                         "type": "integer"
                                     },
-                                    "role_id": {
+                                    "RoleID": {
                                         "type": "integer"
                                     }
                                 },
@@ -1247,56 +1257,6 @@
             }
         },
         "/digital/api/user-roles/{user_id}/{role_id}": {
-            "get": {
-                "tags": [
-                    "UserRoles"
-                ],
-                "summary": "Get a user role",
-                "description": "Get details of a user role from the system",
-                "operationId": "GetUserRole",
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "Id of the user",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "example": 1
-                    },
-                    {
-                        "name": "role_id",
-                        "in": "path",
-                        "description": "Id of the role",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "example": 1
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Data Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "No data found",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "UserRoles"
@@ -1348,6 +1308,47 @@
                 }
             }
         },
+        "/digital/api/user-roles/{RoleID}": {
+            "get": {
+                "tags": [
+                    "UserRoles"
+                ],
+                "summary": "Get a user role",
+                "description": "Get details of a user role from the system",
+                "operationId": "GetUserRole",
+                "parameters": [
+                    {
+                        "name": "RoleID",
+                        "in": "path",
+                        "description": "Id of the role",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/users": {
             "post": {
                 "tags": [
@@ -1361,19 +1362,22 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "username",
-                                    "password_hash",
-                                    "email"
+                                    "Username",
+                                    "PasswordHash",
+                                    "Email"
                                 ],
                                 "properties": {
-                                    "username": {
-                                        "type": "string"
+                                    "Username": {
+                                        "type": "string",
+                                        "example": "john_doe"
                                     },
-                                    "password_hash": {
-                                        "type": "string"
+                                    "PasswordHash": {
+                                        "type": "string",
+                                        "example": "$2y$10$eImiTXuWVxfM37uY4JANjQ=="
                                     },
-                                    "email": {
-                                        "type": "string"
+                                    "Email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
                                     }
                                 },
                                 "type": "object"

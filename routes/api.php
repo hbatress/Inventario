@@ -46,7 +46,7 @@ Route::prefix('api/')->group(function () {
     Route::prefix('user-roles')->group(function () {
         Route::post('/', [UserRolesActionController::class, 'store']);
         Route::delete('/{user_id}/{role_id}', [UserRolesActionController::class, 'destroy']);
-        Route::get('/{user_id}/{role_id}', [UserRolesQueryController::class, 'show']);
+        Route::get('/{RoleID}', [UserRolesQueryController::class, 'show']);
     });
 
     Route::prefix('users')->group(function () {

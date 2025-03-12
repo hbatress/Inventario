@@ -46,8 +46,7 @@ class DepartmentsQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->departmentQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->departmentQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

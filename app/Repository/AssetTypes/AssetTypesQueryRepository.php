@@ -12,11 +12,7 @@ class AssetTypesQueryRepository extends BaseRepository  implements AssetTypesQue
         parent::__construct(new AssetType());
     }
     public function getAction($id){
-        $action = $this->model->where('TypeID', $id)->first();
-        if (!$action) {
-            return ['status' => false, 'data' => null];
-        }
-        return ['status' => true, 'data' => $action];
+        return $this->model->where('TypeID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

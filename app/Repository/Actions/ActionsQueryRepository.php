@@ -15,11 +15,7 @@ class ActionsQueryRepository extends BaseRepository implements ActionsQueryInter
         parent::__construct(new Action());
     }
     public function getAction($id){
-        $action = $this->model->where('ActionID', $id)->first();
-        if (!$action) {
-            return ['status' => false, 'data' => null];
-        }
-        return ['status' => true, 'data' => $action];
+        return $this->model->where('ActionID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

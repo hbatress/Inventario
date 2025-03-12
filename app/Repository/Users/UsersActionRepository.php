@@ -4,13 +4,13 @@ namespace App\Repository\Users;
 use App\Contracts\Users\UsersActionInterface;
 use Illuminate\Database\Eloquent\Model;
 use App\Repository\BaseRepository;
-use App\Models\Person;
+use App\Models\Persons;
 use Illuminate\Support\Facades\Log;
 class UsersActionRepository  extends BaseRepository implements UsersActionInterface
 {
     public function __construct()
     {
-        parent::__construct(new Person());
+        parent::__construct(new Persons());
     }
     public function create( $data){
         try{

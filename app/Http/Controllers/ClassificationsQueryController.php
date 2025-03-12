@@ -46,8 +46,7 @@ class ClassificationsQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->classificationQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->classificationQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Roles\RolesActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Roles\RolesRequest;
 class RolesActionController extends Controller
 {
     protected $roleAction;
@@ -28,8 +28,8 @@ class RolesActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"role_name"},
-     *                 @OA\Property(property="role_name", type="string"),
+     *                 required={"RoleName"},
+     *                 @OA\Property(property="RoleName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class RolesActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->roleAction->create($request->all());
+    public function store(RolesRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->roleAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

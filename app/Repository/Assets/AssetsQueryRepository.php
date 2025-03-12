@@ -12,7 +12,7 @@ class AssetsQueryRepository extends BaseRepository implements AssetsQueryInterfa
         parent::__construct(new Asset());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('AssetID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

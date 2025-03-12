@@ -46,8 +46,7 @@ class StatusesQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->statusQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->statusQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

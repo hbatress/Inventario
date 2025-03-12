@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Classifications\ClassificationsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Classifications\ClassificationsRequest;
 class ClassificationsActionController extends Controller
 {
     protected $classificationAction;
@@ -28,8 +28,8 @@ class ClassificationsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"classification_name"},
-     *                 @OA\Property(property="classification_name", type="string"),
+     *                 required={"ClassificationName"},
+     *                 @OA\Property(property="ClassificationName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class ClassificationsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->classificationAction->create($request->all());
+    public function store(ClassificationsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->classificationAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

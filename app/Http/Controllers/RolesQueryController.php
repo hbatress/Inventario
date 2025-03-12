@@ -46,8 +46,7 @@ class RolesQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->roleQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->roleQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

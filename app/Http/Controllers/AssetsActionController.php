@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Assets\AssetsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Assets\AssetsRequest;
 class AssetsActionController extends Controller
 {
     protected $assetAction;
@@ -28,17 +28,17 @@ class AssetsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"code", "name", "type_id", "location_id", "department_id", "status_id", "classification_id", "criticality_id", "action_id", "created_by"},
-     *                 @OA\Property(property="code", type="string"),
-     *                 @OA\Property(property="name", type="string"),
-     *                 @OA\Property(property="type_id", type="integer"),
-     *                 @OA\Property(property="location_id", type="integer"),
-     *                 @OA\Property(property="department_id", type="integer"),
-     *                 @OA\Property(property="status_id", type="integer"),
-     *                 @OA\Property(property="classification_id", type="integer"),
-     *                 @OA\Property(property="criticality_id", type="integer"),
-     *                 @OA\Property(property="action_id", type="integer"),
-     *                 @OA\Property(property="created_by", type="integer"),
+    *                 required={"Code", "Name", "TypeID", "LocationID", "DepartmentID", "StatusID", "ClassificationID", "CriticalityID", "ActionID", "CreatedBy"},
+    *                 @OA\Property(property="Code", type="string", example="A12345"),
+    *                 @OA\Property(property="Name", type="string", example="Asset Name"),
+    *                 @OA\Property(property="TypeID", type="integer", example=1),
+    *                 @OA\Property(property="LocationID", type="integer", example=1),
+    *                 @OA\Property(property="DepartmentID", type="integer", example=1),
+    *                 @OA\Property(property="StatusID", type="integer", example=1),
+    *                 @OA\Property(property="ClassificationID", type="integer", example=1),
+    *                 @OA\Property(property="CriticalityID", type="integer", example=1),
+    *                 @OA\Property(property="ActionID", type="integer", example=1),
+    *                 @OA\Property(property="CreatedBy", type="integer", example=1),
      *             ),
      *         ),
      *     ),
@@ -54,10 +54,11 @@ class AssetsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->assetAction->create($request->all());
+    public function store(AssetsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->assetAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

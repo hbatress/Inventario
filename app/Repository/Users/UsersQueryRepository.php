@@ -12,7 +12,7 @@ class UsersQueryRepository  extends BaseRepository implements UsersQueryInterfac
         parent::__construct(new Person());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('UserID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

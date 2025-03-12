@@ -46,8 +46,7 @@ class AssetsQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->assetQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->assetQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

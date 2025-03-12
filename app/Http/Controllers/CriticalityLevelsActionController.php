@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\CriticalityLevels\CriticalityLevelsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\CriticalityLevels\CriticalityLevelsRequest;
 class CriticalityLevelsActionController extends Controller
 {
     protected $criticalityLevelAction;
@@ -28,8 +28,8 @@ class CriticalityLevelsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"criticality_name"},
-     *                 @OA\Property(property="criticality_name", type="string"),
+     *                 required={"CriticalityName"},
+     *                 @OA\Property(property="CriticalityName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class CriticalityLevelsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->criticalityLevelAction->create($request->all());
+    public function store(CriticalityLevelsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->criticalityLevelAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

@@ -46,8 +46,7 @@ class CriticalityLevelsQueryController extends Controller
      * )
      */
     public function show($id) : JsonResponse {
-        list($status, $data) = $this->criticalityLevelQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+        $result =  $this->criticalityLevelQuery->getAction($id);
+        return $this->responseWithData($result);
     }
 }

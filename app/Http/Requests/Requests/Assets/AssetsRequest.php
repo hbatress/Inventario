@@ -11,7 +11,7 @@ class AssetsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class AssetsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'Code' => 'required|string|max:50',
+            'Name' => 'required|string|max:100',
+            'TypeID' => 'nullable|exists:asset_types,TypeID',
+            'LocationID' => 'nullable|exists:locations,LocationID',
+            'DepartmentID' => 'nullable|exists:departments,DepartmentID',
+            'StatusID' => 'nullable|exists:statuses,StatusID',
+            'ClassificationID' => 'nullable|exists:classifications,ClassificationID',
+            'CriticalityID' => 'nullable|exists:criticality_levels,CriticalityID',
+            'ActionID' => 'nullable|exists:actions,ActionID',
+            'CreatedBy' => 'nullable|exists:persons,UserID',
         ];
     }
 }

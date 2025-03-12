@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Users\UsersActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Users\UsersRequest;
 class UsersActionController extends Controller
 {
     protected $userAction;
@@ -28,10 +28,10 @@ class UsersActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"username", "password_hash", "email"},
-     *                 @OA\Property(property="username", type="string"),
-     *                 @OA\Property(property="password_hash", type="string"),
-     *                 @OA\Property(property="email", type="string"),
+    *                 required={"Username", "PasswordHash", "Email"},
+    *                 @OA\Property(property="Username", type="string", example="john_doe"),
+    *                 @OA\Property(property="PasswordHash", type="string", example="$2y$10$eImiTXuWVxfM37uY4JANjQ=="),
+    *                 @OA\Property(property="Email", type="string", example="john.doe@example.com"),
      *             ),
      *         ),
      *     ),
@@ -47,10 +47,11 @@ class UsersActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->userAction->create($request->all());
+    public function store(UsersRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->userAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

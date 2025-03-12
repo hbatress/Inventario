@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Departments\DepartmentsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Departments\DepartmentsRequest;
 class DepartmentsActionController extends Controller
 {
     protected $departmentAction;
@@ -28,8 +28,8 @@ class DepartmentsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"department_name"},
-     *                 @OA\Property(property="department_name", type="string"),
+     *                 required={"DepartmentName"},
+     *                 @OA\Property(property="DepartmentName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class DepartmentsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->departmentAction->create($request->all());
+    public function store(DepartmentsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->departmentAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

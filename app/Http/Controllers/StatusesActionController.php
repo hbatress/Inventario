@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Statuses\StatusesActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Statuses\StatusesRequest;
 class StatusesActionController extends Controller
 {
     protected $statusAction;
@@ -28,8 +28,8 @@ class StatusesActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"status_name"},
-     *                 @OA\Property(property="status_name", type="string"),
+     *                 required={"StatusName"},
+     *                 @OA\Property(property="StatusName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class StatusesActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->statusAction->create($request->all());
+    public function store(StatusesRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->statusAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

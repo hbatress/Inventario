@@ -12,7 +12,7 @@ class ClassificationsQueryRepository  extends BaseRepository implements Classifi
         parent::__construct(new Classification());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('ClassificationID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

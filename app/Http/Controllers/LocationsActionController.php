@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Locations\LocationsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Locations\LocationsRequest;
 class LocationsActionController extends Controller
 {
     protected $locationAction;
@@ -28,8 +28,8 @@ class LocationsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"location_name"},
-     *                 @OA\Property(property="location_name", type="string"),
+     *                 required={"LocationName"},
+     *                 @OA\Property(property="LocationName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class LocationsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->locationAction->create($request->all());
+    public function store(LocationsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->locationAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

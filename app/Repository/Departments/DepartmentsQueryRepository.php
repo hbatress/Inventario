@@ -12,7 +12,7 @@ class DepartmentsQueryRepository  extends BaseRepository implements DepartmentsQ
         parent::__construct(new Department());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('DepartmentID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

@@ -12,7 +12,7 @@ class StatusesQueryRepository  extends BaseRepository implements StatusesQueryIn
         parent::__construct(new Status());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('StatusID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

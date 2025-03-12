@@ -12,7 +12,7 @@ class LocationsQueryRepository  extends BaseRepository implements LocationsQuery
         parent::__construct(new Location());
     }
     public function getAction($id){
-        return $this->model->find($id);
+        return $this->model->where('LocationID', $id)->first();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();
