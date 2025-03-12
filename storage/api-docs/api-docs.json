@@ -19,10 +19,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "action_name"
+                                    "ActionName"
                                 ],
                                 "properties": {
-                                    "action_name": {
+                                    "ActionName": {
                                         "type": "string"
                                     }
                                 },
@@ -147,10 +147,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "type_name"
+                                    "TypeName"
                                 ],
                                 "properties": {
-                                    "type_name": {
+                                    "TypeName": {
                                         "type": "string"
                                     }
                                 },

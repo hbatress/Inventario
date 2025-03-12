@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('asset_types', function (Blueprint $table) {
             $table->id('TypeID');
-            $table->string('TypeName', 50)->unique();
+            $table->string('TypeName', 50);
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\AssetTypes\AssetTypesActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\AssetTypes\AssetTypesRequest;   
 class AssetTypesActionController extends Controller
 {
     protected $assetTypeAction;
@@ -28,8 +28,8 @@ class AssetTypesActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"type_name"},
-     *                 @OA\Property(property="type_name", type="string"),
+     *                 required={"TypeName"},
+     *                 @OA\Property(property="TypeName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,10 +45,11 @@ class AssetTypesActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        list($status, $message, $data) = $this->assetTypeAction->create($request->all());
+    public function store(AssetTypesRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->assetTypeAction->create($validatedData);
         if (!$status) return $this->responseError($message);
-        return $this->responseWithData($data, 201);
+        return $this->responseSuccess($message);
     }
 
     /**

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assets_tablecls', function (Blueprint $table) {
             $table->id('AssetID');
-            $table->string('Code', 50)->unique();
+            $table->string('Code', 50);
             $table->string('Name', 100);
             $table->unsignedBigInteger('TypeID')->nullable();
             $table->unsignedBigInteger('LocationID')->nullable();

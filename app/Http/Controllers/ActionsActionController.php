@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Actions\ActionsActionInterface;
 use Illuminate\Http\JsonResponse;
-
+use App\Http\Requests\Requests\Actions\ActionsRequest;
 class ActionsActionController extends Controller
 {
     protected $actionAction;
@@ -28,8 +28,8 @@ class ActionsActionController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 type="object",
-     *                 required={"action_name"},
-     *                 @OA\Property(property="action_name", type="string"),
+     *                 required={"ActionName"},
+     *                 @OA\Property(property="ActionName", type="string"),
      *             ),
      *         ),
      *     ),
@@ -45,14 +45,11 @@ class ActionsActionController extends Controller
      *     ),
      * )
      */
-    public function store(Request $request) : JsonResponse {
-        $validatedData = $request->validate([
-            'ActionName' => 'required|string|max:255',
-        ]);
-    
-        $action = $this->actionAction->create($validatedData);
-    
-        return response()->json(['status' => true, 'message' => 'Action created successfully', 'data' => $action], 201);
+    public function store(ActionsRequest $request) : JsonResponse {
+        $validatedData = $request->validated();
+        list($status, $message) = $this->actionAction->create($validatedData);
+        if (!$status) return $this->responseError($message);
+        return $this->responseSuccess($message);
     }
 
     /**

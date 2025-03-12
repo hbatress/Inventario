@@ -5,6 +5,7 @@ use App\Contracts\Actions\ActionsActionInterface;
 use App\Models\Action;
 use Illuminate\Database\Eloquent\Model;
 use App\Repository\BaseRepository;
+use Illuminate\Support\Facades\Log;
 class ActionsActionRepository extends BaseRepository  implements ActionsActionInterface
 {
     /**
@@ -15,19 +16,15 @@ class ActionsActionRepository extends BaseRepository  implements ActionsActionIn
         parent::__construct(new Action());
     }
 
-    public function create(array $data)
+    public function create($data)
     {
-        $validatedData = validator($data, [
-            'ActionName' => 'required|string|max:255',
-            // otros campos y sus reglas de validación
-        ])->validate();
-    
-        $action = new Action();
-        $action->ActionName = $validatedData['ActionName'];
-        // asignar otros campos
-        $action->save();
-    
-        return $action;
+        try{
+            $this->model->create($data);
+            return [true, "Accion Agregada", 200];
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return [false, "Internal Server Error ",500, null];
+        }
     }
     public function update( $id, $data){
         $record = $this->find($id);

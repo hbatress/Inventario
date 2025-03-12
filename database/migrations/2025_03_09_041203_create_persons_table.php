@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id('UserID');
-            $table->string('Username', 50)->unique();
+            $table->string('Username', 50);
             $table->string('PasswordHash', 255);
-            $table->string('Email', 100)->unique();
+            $table->string('Email', 100);
             $table->timestamp('RegistrationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });

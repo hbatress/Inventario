@@ -45,9 +45,16 @@ class AssetTypesQueryController extends Controller
      *     ),
      * )
      */
-    public function show($id) : JsonResponse {
-        list($status, $data) = $this->assetTypeQuery->getAction($id);
-        if (!$status) return $this->responseError('No data found');
-        return $this->responseWithData($data);
+    public function show($id) : JsonResponse {  
+    $result = $this->assetTypeQuery->getAction($id);
+        if ($result['status']) {
+            // Acceder a los datos como un array
+            $action = $result['data'];
+            // ... código adicional ...
+            return response()->json($action, 200);
+        } else {
+            // Manejar el caso en que no se encuentra la acción
+            return response()->json(['status' => false, 'message' => 'No data found'], 404);
+        }
     }
 }

@@ -8,14 +8,8 @@ class Action extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'ActionID';
-
     protected $fillable = [
         'ActionName'
     ];
 
-    public function assets()
-    {
-        return $this->hasMany(Asset::class, 'ActionID', 'ActionID');
-    }
 }

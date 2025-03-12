@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('criticality_levels', function (Blueprint $table) {
             $table->id('CriticalityID');
-            $table->string('CriticalityName', 50)->unique();
+            $table->string('CriticalityName', 50);
             $table->timestamps();
         });
     }
