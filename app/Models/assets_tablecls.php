@@ -51,6 +51,6 @@ class assets_tablecls extends Model
 
     public function creator()
     {
-        return $this->belongsTo(Person::class, 'CreatedBy', 'UserID');
+        return $this->belongsTo(Persons::class, 'UserID', 'UserID');
     }
 }

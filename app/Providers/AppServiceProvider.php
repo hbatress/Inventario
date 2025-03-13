@@ -48,7 +48,7 @@ use App\Repository\Actions\ActionsQueryRepository;
 use App\Repository\Assets\AssetsActionRepository;
 use App\Repository\Assets\AssetsQueryRepository;
 use App\Repository\BaseRepository;
-
+use Illuminate\Database\Eloquent\Model;
 class AppServiceProvider extends ServiceProvider
 {
     /**

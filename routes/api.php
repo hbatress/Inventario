@@ -24,7 +24,7 @@ use App\Http\Controllers\AssetsQueryController;
 use App\Http\Controllers\ActionsActionController;
 use App\Http\Controllers\ActionsQueryController;
 
-Route::prefix('api/')->group(function () {
+
     Route::prefix('departments')->group(function () {
         Route::post('/', [DepartmentsActionController::class, 'store']);
         Route::delete('/{id}', [DepartmentsActionController::class, 'destroy']);
@@ -50,13 +50,17 @@ Route::prefix('api/')->group(function () {
     });
 
     Route::prefix('users')->group(function () {
-        Route::post('/', [UsersActionController::class, 'store']);
+        Route::get('/list', [UsersQueryController::class, 'Information']);
+        Route::post('/add', [UsersActionController::class, 'store']);
         Route::post('/login', [UsersActionController::class, 'login']);
         Route::delete('/{id}', [UsersActionController::class, 'destroy']);
         Route::get('/{id}', [UsersQueryController::class, 'show']);
-        Route::get('/list', [UsersQueryController::class, 'index']);
+       
     });
-
+    Route::prefix('users')->group(function () {
+        Route::get('/list', [UsersQueryController::class, 'Information']);
+       
+    });
     Route::prefix('statuses')->group(function () {
         Route::post('/', [StatusesActionController::class, 'store']);
         Route::delete('/{id}', [StatusesActionController::class, 'destroy']);
@@ -86,6 +90,7 @@ Route::prefix('api/')->group(function () {
         Route::delete('/{id}', [AssetsActionController::class, 'destroy']);
         Route::get('/{id}', [AssetsQueryController::class, 'show']);
         Route::get('/list', [AssetsQueryController::class, 'index']);
+        Route::post('/{id}', [AssetsActionController::class, 'update']);
     });
 
     Route::prefix('actions')->group(function () {
@@ -93,4 +98,3 @@ Route::prefix('api/')->group(function () {
         Route::delete('/{id}', [ActionsActionController::class, 'destroy']);
         Route::get('/{id}', [ActionsQueryController::class, 'show']);
     });
-});

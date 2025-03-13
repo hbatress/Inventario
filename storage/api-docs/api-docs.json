@@ -323,7 +323,7 @@
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "CreatedBy": {
+                                    "UserID": {
                                         "type": "integer",
                                         "example": 1
                                     }
@@ -380,6 +380,107 @@
                 "responses": {
                     "200": {
                         "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Assets"
+                ],
+                "summary": "Update an existing asset",
+                "description": "Update an existing asset in the system",
+                "operationId": "UpdateAsset",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the asset",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "Code": {
+                                        "type": "string",
+                                        "example": "A12345"
+                                    },
+                                    "Name": {
+                                        "type": "string",
+                                        "example": "Asset Name"
+                                    },
+                                    "TypeID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "LocationID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "DepartmentID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "StatusID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "ClassificationID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "CriticalityID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "ActionID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "UserID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resource updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -1377,7 +1478,7 @@
                 }
             }
         },
-        "/digital/api/users": {
+        "/digital/api/users/add": {
             "post": {
                 "tags": [
                     "Users"

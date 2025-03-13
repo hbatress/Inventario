@@ -17,7 +17,7 @@ class UsersActionController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/digital/api/users",
+     *     path="/digital/api/users/add",
      *     operationId="StoreUser",
      *     tags={"Users"},
      *     summary="Store a new user",

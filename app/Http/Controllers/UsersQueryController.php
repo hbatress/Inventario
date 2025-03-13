@@ -14,6 +14,7 @@ class UsersQueryController extends Controller
     public function __construct(UsersQueryInterface $userQuery)
     {
         $this->userQuery = $userQuery;
+        Log::info('UsersQueryController instantiated');
     }
 
     /**
@@ -71,9 +72,15 @@ class UsersQueryController extends Controller
      *     ),
      * )
      */
-    public function index() {
-        $result =  $this->userQuery->getAll();
-        \Log::info('Result from get method:', $result);
-        return $this->responseWithData($result);
+
+    public function Information(): JsonResponse {
+        try {
+            $result = $this->userQuery->getAll();
+            Log::info('Result from get method:', $result);
+            return $this->responseWithData($result);
+        } catch (\Exception $e) {
+            Log::error('Error in Information method: ' . $e->getMessage());
+            return response()->json(['error' => 'Error retrieving user information'], 500);
+        }
     }
 }

@@ -21,8 +21,13 @@ class UsersQueryRepository  extends BaseRepository implements UsersQueryInterfac
 
     public function getAll()
     {
-        $data = $this->model->all()->toArray();
-        \Log::info('Data retrieved:', $data);
-        return $data;
+        try {
+            $data = $this->model->select('UserID', 'Username')->get()->toArray();
+            Log::info('Data retrieved:', $data);
+            return $data;
+        } catch (\Exception $e) {
+            Log::error('Error retrieving data: ' . $e->getMessage());
+            return [];
+        }
     }
 }
