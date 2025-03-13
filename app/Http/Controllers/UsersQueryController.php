@@ -72,7 +72,7 @@ class UsersQueryController extends Controller
      * )
      */
     public function index() {
-        $result =  $this->userQuery->get();
+        $result =  $this->userQuery->getAll();
         \Log::info('Result from get method:', $result);
         return $this->responseWithData($result);
     }
