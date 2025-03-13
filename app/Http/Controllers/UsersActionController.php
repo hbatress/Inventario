@@ -30,7 +30,7 @@ class UsersActionController extends Controller
      *                 type="object",
     *                 required={"Username", "PasswordHash", "Email"},
     *                 @OA\Property(property="Username", type="string", example="john_doe"),
-    *                 @OA\Property(property="PasswordHash", type="string", example="$2y$10$eImiTXuWVxfM37uY4JANjQ=="),
+    *                  @OA\Property(property="PasswordHash", type="string", example="P@ssw0rd123!", description="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character."),
     *                 @OA\Property(property="Email", type="string", example="john.doe@example.com"),
      *             ),
      *         ),
@@ -88,5 +88,42 @@ class UsersActionController extends Controller
         list($status, $message) = $this->userAction->delete($id);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/digital/api/users/login",
+     *     operationId="LoginUser",
+     *     tags={"Users"},
+     *     summary="Login a user",
+     *     description="Login a user with email and password",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"Email", "PasswordHash"},
+     *                 @OA\Property(property="Email", type="string", format="email", example="john.doe@example.com"),
+     *                 @OA\Property(property="PasswordHash", type="string", format="password", example="password123")
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Login successful",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="401",
+     *         description="Unauthorized",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function login(Request $request) : JsonResponse {
+        $credentials = $request->only('Email', 'PasswordHash');
+        $result = $this->userAction->loginAction($credentials);
+        return $this->responseWithData($result);
     }
 }

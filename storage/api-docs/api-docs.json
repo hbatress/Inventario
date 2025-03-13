@@ -436,6 +436,34 @@
                 }
             }
         },
+        "/digital/api/assets/list": {
+            "get": {
+                "tags": [
+                    "Assets"
+                ],
+                "summary": "List all assets",
+                "description": "Get a list of all assets from the system",
+                "operationId": "ListAssets",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/classifications": {
             "post": {
                 "tags": [
@@ -1372,8 +1400,9 @@
                                         "example": "john_doe"
                                     },
                                     "PasswordHash": {
+                                        "description": "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
                                         "type": "string",
-                                        "example": "$2y$10$eImiTXuWVxfM37uY4JANjQ=="
+                                        "example": "P@ssw0rd123!"
                                     },
                                     "Email": {
                                         "type": "string",
@@ -1471,6 +1500,90 @@
                 "responses": {
                     "200": {
                         "description": "Resource deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login a user",
+                "description": "Login a user with email and password",
+                "operationId": "LoginUser",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "Email",
+                                    "PasswordHash"
+                                ],
+                                "properties": {
+                                    "Email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "PasswordHash": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/users/list": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "description": "Get details of all users from the system",
+                "operationId": "GetAllUsers",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
                         "content": {
                             "application/json": {
                                 "schema": {}

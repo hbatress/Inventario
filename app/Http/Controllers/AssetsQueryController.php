@@ -49,4 +49,28 @@ class AssetsQueryController extends Controller
         $result =  $this->assetQuery->getAction($id);
         return $this->responseWithData($result);
     }
+
+
+    /**
+     * @OA\Get(
+     *     path="/digital/api/assets/list",
+     *     operationId="ListAssets",
+     *     tags={"Assets"},
+     *     summary="List all assets",
+     *     description="Get a list of all assets from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        return $this->assetQuery->getAll();
+    }
 }

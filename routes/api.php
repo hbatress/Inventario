@@ -51,8 +51,10 @@ Route::prefix('api/')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::post('/', [UsersActionController::class, 'store']);
+        Route::post('/login', [UsersActionController::class, 'login']);
         Route::delete('/{id}', [UsersActionController::class, 'destroy']);
         Route::get('/{id}', [UsersQueryController::class, 'show']);
+        Route::get('/list', [UsersQueryController::class, 'index']);
     });
 
     Route::prefix('statuses')->group(function () {
@@ -83,6 +85,7 @@ Route::prefix('api/')->group(function () {
         Route::post('/', [AssetsActionController::class, 'store']);
         Route::delete('/{id}', [AssetsActionController::class, 'destroy']);
         Route::get('/{id}', [AssetsQueryController::class, 'show']);
+        Route::get('/list', [AssetsQueryController::class, 'index']);
     });
 
     Route::prefix('actions')->group(function () {

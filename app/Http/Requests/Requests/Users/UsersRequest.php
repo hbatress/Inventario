@@ -23,7 +23,7 @@ class UsersRequest extends FormRequest
     {
         return [
             'Username' => 'required|string|max:50',
-            'PasswordHash' => 'required|string|max:255',
+            'PasswordHash' => 'required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[@$!%*?&#]/',
             'Email' => 'required|string|email|max:100'
         ];
     }
