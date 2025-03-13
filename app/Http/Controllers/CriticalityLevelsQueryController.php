@@ -49,4 +49,27 @@ class CriticalityLevelsQueryController extends Controller
         $result =  $this->criticalityLevelQuery->getAction($id);
         return $this->responseWithData($result);
     }
+        /**
+     * @OA\Get(
+     *     path="/digital/api/criticality-levels/list",
+     *     operationId="GetAlcriticality",
+     *     tags={"CriticalityLevels"},
+     *     summary="Get all actions",
+     *     description="Get details of all actions from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        $result =  $this->criticalityLevelQuery->getAll();
+        return $this->responseWithData($result);    
+    }
 }

@@ -49,4 +49,27 @@ class LocationsQueryController extends Controller
         $result =  $this->locationQuery->getAction($id);
         return $this->responseWithData($result);
     }
+        /**
+     * @OA\Get(
+     *     path="/digital/api/locations/list",
+     *     operationId="GetAllocations",
+     *     tags={"Locations"},
+     *     summary="Get all locations",
+     *     description="Get details of all locations from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        $result =  $this->locationQuery->getAll();
+        return $this->responseWithData($result);
+    }
 }

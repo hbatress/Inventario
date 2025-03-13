@@ -54,4 +54,27 @@ class UserRolesQueryController extends Controller
     
         return $this->responseWithData($result);
     }
+    /**
+     * @OA\Get(
+     *     path="/digital/api/user-roles/list",
+     *     operationId="GetAllUserRoles",
+     *     tags={"UserRoles"},
+     *     summary="Get all user roles",
+     *     description="Get details of all user roles from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        $result =  $this->userRoleQuery->getAll();
+        return $this->responseWithData($result);
+    }    
 }

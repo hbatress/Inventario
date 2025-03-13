@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Persons extends Model
 {
 
-        use HasFactory;
+        use HasFactory, SoftDeletes;
     
         protected $primaryKey = 'UserID';
     
@@ -22,6 +23,6 @@ class Persons extends Model
     
         public function assets()
         {
-            return $this->hasMany(Asset::class, 'CreatedBy', 'UserID');
+            return $this->hasMany(assets_tablecls::class, 'CreatedBy', 'UserID');
         }
 }

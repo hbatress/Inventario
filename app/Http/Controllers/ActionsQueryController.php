@@ -51,4 +51,28 @@ class ActionsQueryController extends Controller
         return $this->responseWithData($result);
        
     }
+    /**
+     * @OA\Get(
+     *     path="/digital/api/actions/list",
+     *     operationId="GetAllActions",
+     *     tags={"Actions"},
+     *     summary="Get all actions",
+     *     description="Get details of all actions from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index()
+    {
+        $result = $this->actionQuery->getAll();
+        return $this->responseWithData($result);
+    }
 }

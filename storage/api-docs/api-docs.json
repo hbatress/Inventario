@@ -134,6 +134,34 @@
                 }
             }
         },
+        "/digital/api/actions/list": {
+            "get": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Get all actions",
+                "description": "Get details of all actions from the system",
+                "operationId": "GetAllActions",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/asset-types": {
             "post": {
                 "tags": [
@@ -245,6 +273,34 @@
                 "responses": {
                     "200": {
                         "description": "Resource deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/asset-types/list": {
+            "get": {
+                "tags": [
+                    "AssetTypes"
+                ],
+                "summary": "Get all actions",
+                "description": "Get details of all actions from the system",
+                "operationId": "GetAllasset",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -693,6 +749,34 @@
                 }
             }
         },
+        "/digital/api/classifications/list": {
+            "get": {
+                "tags": [
+                    "Classifications"
+                ],
+                "summary": "Get all actions",
+                "description": "Get details of all actions from the system",
+                "operationId": "GetAllclassifications",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/criticality-levels": {
             "post": {
                 "tags": [
@@ -804,6 +888,34 @@
                 "responses": {
                     "200": {
                         "description": "Resource deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/criticality-levels/list": {
+            "get": {
+                "tags": [
+                    "CriticalityLevels"
+                ],
+                "summary": "Get all actions",
+                "description": "Get details of all actions from the system",
+                "operationId": "GetAlcriticality",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -949,6 +1061,34 @@
                 }
             }
         },
+        "/digital/api/departments/list": {
+            "get": {
+                "tags": [
+                    "Departments"
+                ],
+                "summary": "Get all departments",
+                "description": "Get details of all departments from the system",
+                "operationId": "Getdepartments",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/locations": {
             "post": {
                 "tags": [
@@ -1060,6 +1200,34 @@
                 "responses": {
                     "200": {
                         "description": "Resource deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/locations/list": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get all locations",
+                "description": "Get details of all locations from the system",
+                "operationId": "GetAllocations",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -1205,6 +1373,34 @@
                 }
             }
         },
+        "/digital/api/roles/list": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get all roles",
+                "description": "Get details of all roles from the system",
+                "operationId": "GetAllRoles",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/digital/api/statuses": {
             "post": {
                 "tags": [
@@ -1316,6 +1512,34 @@
                 "responses": {
                     "200": {
                         "description": "Resource deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/statuses/list": {
+            "get": {
+                "tags": [
+                    "Statuses"
+                ],
+                "summary": "Get all actions",
+                "description": "Get details of all actions from the system",
+                "operationId": "GetAllstatuses",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -1458,6 +1682,34 @@
                         "example": 1
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/user-roles/list": {
+            "get": {
+                "tags": [
+                    "UserRoles"
+                ],
+                "summary": "Get all user roles",
+                "description": "Get details of all user roles from the system",
+                "operationId": "GetAllUserRoles",
                 "responses": {
                     "200": {
                         "description": "Data Found",

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('PasswordHash', 255);
             $table->string('Email', 100);
             $table->timestamp('RegistrationDate')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->softDeletes();
             $table->timestamps();
         });
     }

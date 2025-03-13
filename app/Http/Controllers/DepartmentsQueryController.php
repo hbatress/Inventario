@@ -49,4 +49,27 @@ class DepartmentsQueryController extends Controller
         $result =  $this->departmentQuery->getAction($id);
         return $this->responseWithData($result);
     }
+        /**
+     * @OA\Get(
+     *     path="/digital/api/departments/list",
+     *     operationId="Getdepartments",
+     *     tags={"Departments"},
+     *     summary="Get all departments",
+     *     description="Get details of all departments from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        $result =  $this->departmentQuery->getAll();
+        return $this->responseWithData($result);
+    }
 }

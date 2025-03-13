@@ -20,4 +20,7 @@ class ActionsQueryRepository extends BaseRepository implements ActionsQueryInter
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();
     }
+    public function getAll(){
+        return $this->model->all();
+    }
 }

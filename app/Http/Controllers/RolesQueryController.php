@@ -49,4 +49,28 @@ class RolesQueryController extends Controller
         $result =  $this->roleQuery->getAction($id);
         return $this->responseWithData($result);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/digital/api/roles/list",
+     *     operationId="GetAllRoles",
+     *     tags={"Roles"},
+     *     summary="Get all roles",
+     *     description="Get details of all roles from the system",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Data Found",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No data found",
+     *         @OA\JsonContent()
+     *     ),
+     * )
+     */
+    public function index() : JsonResponse {
+        $result =  $this->roleQuery->getAll();
+        return $this->responseWithData($result);
+    }
 }

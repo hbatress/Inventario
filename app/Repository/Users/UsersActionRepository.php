@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Repository\BaseRepository;
 use App\Models\Persons;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 class UsersActionRepository  extends BaseRepository implements UsersActionInterface
 {
     public function __construct()
@@ -39,7 +40,7 @@ class UsersActionRepository  extends BaseRepository implements UsersActionInterf
 
     public function loginAction($credentials) {
         $user = $this->model->where('Email', $credentials['Email'])->first();
-        if ($user && \Hash::check($credentials['PasswordHash'], $user->PasswordHash)) {
+        if ($user && Hash::check($credentials['PasswordHash'], $user->PasswordHash)) {
             return [true, "Login Successful", 200, ['UserID' => $user->UserID,'Username'=>$user->Username, 'Email' => $user->Email]];
         }
         return [false, "Invalid Credentials", 401, null];
