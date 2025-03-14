@@ -327,6 +327,7 @@
                 "description": "Store a new asset in the system",
                 "operationId": "StoreAsset",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "multipart/form-data": {
                             "schema": {
@@ -339,7 +340,6 @@
                                     "StatusID",
                                     "ClassificationID",
                                     "CriticalityID",
-                                    "ActionID",
                                     "CreatedBy"
                                 ],
                                 "properties": {
@@ -349,46 +349,52 @@
                                     },
                                     "Name": {
                                         "type": "string",
-                                        "example": "Asset Name"
+                                        "example": "Company Laptop"
+                                    },
+                                    "Description": {
+                                        "type": "string",
+                                        "example": "Dell Latitude 5520 - Business Laptop"
+                                    },
+                                    "LocationID": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "Owner": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "DepartmentID": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "AcquisitionDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-15"
                                     },
                                     "TypeID": {
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "LocationID": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "DepartmentID": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
                                     "StatusID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 4
                                     },
                                     "ClassificationID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 2
                                     },
                                     "CriticalityID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 3
                                     },
-                                    "ActionID": {
+                                    "CreatedBy": {
                                         "type": "integer",
-                                        "example": 1
-                                    },
-                                    "UserID": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "example": 5
                                     }
                                 },
                                 "type": "object"
                             }
-                        },
-                        "application/json": {
-                            "schema": {}
                         }
                     }
                 },
@@ -601,6 +607,58 @@
                 "summary": "List all assets",
                 "description": "Get a list of all assets from the system",
                 "operationId": "ListAssets",
+                "responses": {
+                    "200": {
+                        "description": "Data Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/digital/api/assets/{idTipo}/{listtipo}": {
+            "get": {
+                "tags": [
+                    "Assets"
+                ],
+                "summary": "Get an asset",
+                "description": "Get details of an asset from the system",
+                "operationId": "GetAssetlit",
+                "parameters": [
+                    {
+                        "name": "idTipo",
+                        "in": "path",
+                        "description": "Id of the asset",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "listtipo",
+                        "in": "path",
+                        "description": "Choose the type of asset filter. The value corresponds to the following options:\n     * *         1 => TypeID,\n     * *         2 => LocationID,\n     * *         3 => DepartmentID,\n     * *         4 => StatusID,\n     * *         5 => ClassificationID,\n     * *         6 => CriticalityID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": 1
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Data Found",

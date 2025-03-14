@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\Departments\DepartmentsQueryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class DepartmentsQueryController extends Controller
 {
@@ -68,8 +69,12 @@ class DepartmentsQueryController extends Controller
      *     ),
      * )
      */
-    public function index() : JsonResponse {
-        $result =  $this->departmentQuery->getAll();
-        return $this->responseWithData($result);
+    public function Information() : JsonResponse {
+        try {
+            $result = $this->departmentQuery->getAll();
+            return $this->responseWithData($result);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error retrieving user information'], 500);
+        }
     }
 }

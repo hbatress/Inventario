@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id('AssetID');
             $table->string('Code', 50);
             $table->string('Name', 100);
-            $table->unsignedBigInteger('TypeID')->nullable();
-            $table->unsignedBigInteger('LocationID')->nullable();
+            $table->string('Description', 100);
+            $table->string('LocationID',150)->nullable();
+            $table->string('Owner', 100)->nullable();
             $table->unsignedBigInteger('DepartmentID')->nullable();
+            $table->date('AcquisitionDate')->nullable();
+            $table->unsignedBigInteger('TypeID')->nullable();
             $table->unsignedBigInteger('StatusID')->nullable();
             $table->unsignedBigInteger('ClassificationID')->nullable();
             $table->unsignedBigInteger('CriticalityID')->nullable();
-            $table->unsignedBigInteger('ActionID')->nullable();
             $table->unsignedBigInteger('CreatedBy')->nullable();
             $table->foreign('TypeID')->references('TypeID')->on('asset_types');
             $table->foreign('LocationID')->references('LocationID')->on('locations');
@@ -29,8 +31,8 @@ return new class extends Migration
             $table->foreign('StatusID')->references('StatusID')->on('statuses');
             $table->foreign('ClassificationID')->references('ClassificationID')->on('classifications');
             $table->foreign('CriticalityID')->references('CriticalityID')->on('criticality_levels');
-            $table->foreign('ActionID')->references('ActionID')->on('actions');
             $table->foreign('CreatedBy')->references('UserID')->on('persons');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

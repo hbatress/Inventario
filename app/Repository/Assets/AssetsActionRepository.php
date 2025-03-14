@@ -40,8 +40,12 @@ class AssetsActionRepository extends BaseRepository implements AssetsActionInter
             return [false, "Internal Server Error", 500];
         }
     }
-    public function delete( $id){
-        $record = $this->find($id);
-        return $record->delete();
+    public function delete($idActivo,){
+        $Expenses = $this->find($idActivo);
+        if (!$Expenses) {
+            return [false, "Activo no encontrado", null];
+        }
+        $Expenses->delete();
+        return [true, "Activo Eliminado", $Expenses];
     }
 }

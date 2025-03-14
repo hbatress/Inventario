@@ -24,14 +24,14 @@ use App\Http\Controllers\AssetsQueryController;
 use App\Http\Controllers\ActionsActionController;
 use App\Http\Controllers\ActionsQueryController;
 
-
+include('listas.php');
     Route::prefix('departments')->group(function () {
         Route::post('/', [DepartmentsActionController::class, 'store']);
         Route::delete('/{id}', [DepartmentsActionController::class, 'destroy']);
         Route::get('/{id}', [DepartmentsQueryController::class, 'show']);
 
     });
-    Route::get('departments/list', [DepartmentsQueryController::class, 'index']);
+    Route::get('departments/list', [DepartmentsQueryController::class, 'Information']);
     Route::prefix('locations')->group(function () {
         Route::post('/', [LocationsActionController::class, 'store']);
         Route::delete('/{id}', [LocationsActionController::class, 'destroy']);
@@ -58,11 +58,11 @@ use App\Http\Controllers\ActionsQueryController;
         Route::post('/login', [UsersActionController::class, 'login']);
         Route::delete('/{id}', [UsersActionController::class, 'destroy']);
         Route::get('/{id}', [UsersQueryController::class, 'show']);
-       
+
     });
 
         Route::get('users/list', [UsersQueryController::class, 'Information']);
-       
+
 
     Route::prefix('statuses')->group(function () {
         Route::post('/', [StatusesActionController::class, 'store']);
