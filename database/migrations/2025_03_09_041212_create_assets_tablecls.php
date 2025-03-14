@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('Code', 50);
             $table->string('Name', 100);
             $table->string('Description', 100);
-            $table->string('LocationID',150)->nullable();
+            $table->string('Location',150)->nullable();
             $table->string('Owner', 100)->nullable();
             $table->unsignedBigInteger('DepartmentID')->nullable();
             $table->date('AcquisitionDate')->nullable();
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->unsignedBigInteger('CriticalityID')->nullable();
             $table->unsignedBigInteger('CreatedBy')->nullable();
             $table->foreign('TypeID')->references('TypeID')->on('asset_types');
-            $table->foreign('LocationID')->references('LocationID')->on('locations');
             $table->foreign('DepartmentID')->references('DepartmentID')->on('departments');
             $table->foreign('StatusID')->references('StatusID')->on('statuses');
             $table->foreign('ClassificationID')->references('ClassificationID')->on('classifications');
