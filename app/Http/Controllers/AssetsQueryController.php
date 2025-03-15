@@ -70,7 +70,8 @@ class AssetsQueryController extends Controller
      *     ),
      * )
      */
-    public function index() : JsonResponse {
+    public function listadosindex()  {
+
         return $this->assetQuery->getAll();
     }
 
@@ -121,8 +122,8 @@ class AssetsQueryController extends Controller
      * )
      */
     public function lisTipo($id,$bandera) : JsonResponse {
-        $result =  $this->assetQuery->getById($id,$bandera);
-        return $this->responseWithData($result);
+        return $this->assetQuery->getById($id,$bandera);
+
     }
 
 }

@@ -35,5 +35,6 @@ use App\Http\Controllers\ActionsQueryController;
     Route::get('asset-types/list', [AssetTypesQueryController::class, 'index']);
     Route::get('/assets/{idTipo}/{listtipo}', [AssetsQueryController::class, 'lisTipo']);
     Route::get('actions/list', [ActionsQueryController::class, 'index']);
+    Route::get('assets/list', [AssetsQueryController::class, 'listadosindex']);
 
 

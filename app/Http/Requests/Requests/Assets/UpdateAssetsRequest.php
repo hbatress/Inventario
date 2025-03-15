@@ -24,14 +24,16 @@ class UpdateAssetsRequest extends FormRequest
         return [
             'Code' => 'nullable|string|max:50',
             'Name' => 'nullable|string|max:100',
-            'TypeID' => 'nullable|integer',
-            'LocationID' => 'nullable|integer',
-            'DepartmentID' => 'nullable|integer',
-            'StatusID' => 'nullable|integer',
-            'ClassificationID' => 'nullable|integer',
-            'CriticalityID' => 'nullable|integer',
-            'ActionID' => 'nullable|integer',
-            'UserID' => 'nullable|integer',
+            'TypeID' => 'nullable|exists:asset_types,TypeID',
+            'Description' => 'nullable|string|max:100',
+            'Owner' => 'nullable|string|max:100',
+            'AcquisitionDate' => 'nullable|date',
+            'LocationID' => 'nullable|exists:locations,LocationID',
+            'DepartmentID' => 'nullable|exists:departments,DepartmentID',
+            'StatusID' => 'nullable|exists:statuses,StatusID',
+            'ClassificationID' => 'nullable|exists:classifications,ClassificationID',
+            'CriticalityID' => 'nullable|exists:criticality_levels,CriticalityID',
+            'UserID' => 'nullable|exists:persons,UserID',
         ];
     }
 }

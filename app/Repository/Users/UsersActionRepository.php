@@ -36,9 +36,19 @@ class UsersActionRepository  extends BaseRepository implements UsersActionInterf
         $record = $this->find($id);
         return $record->update($data);
     }
-    public function delete( $id){
-        $record = $this->find($id);
-        return $record->delete();
+    public function delete($id)
+    {
+        // Buscar el registro primero
+        $Expenses = $this->model->where('UserID', $id)->first();
+        if (!$Expenses) {
+            return [false, "Usuario no encontrado", 400, null];
+        }
+
+        // Eliminar el registro
+        $Expenses->delete();
+
+        // Retornar éxito después de eliminar
+        return [true, "Usuario eliminado exitosamente", $Expenses];
     }
 
     public function loginAction($credentials) {

@@ -96,9 +96,7 @@ include('listas.php');
         Route::post('/', [AssetsActionController::class, 'store']);
         Route::delete('/{id}', [AssetsActionController::class, 'destroy']);
         Route::get('/{id}', [AssetsQueryController::class, 'show']);
-        Route::get('/list', [AssetsQueryController::class, 'index']);
         Route::post('/{id}', [AssetsActionController::class, 'update']);
-        Route::get('/list', [AssetsActionController::class, 'index']);
     });
 
     Route::prefix('actions')->group(function () {
