@@ -489,35 +489,48 @@
                                     },
                                     "Name": {
                                         "type": "string",
-                                        "example": "Asset Name"
+                                        "example": "Company Laptop"
+                                    },
+                                    "Description": {
+                                        "type": "string",
+                                        "example": "Dell Latitude 5520 - Business Laptop"
+                                    },
+                                    "LocationID": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "Owner": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "DepartmentID": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "AcquisitionDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-15"
                                     },
                                     "TypeID": {
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "LocationID": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "DepartmentID": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
                                     "StatusID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 4
                                     },
                                     "ClassificationID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 2
                                     },
                                     "CriticalityID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 3
                                     },
                                     "UserID": {
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 5
                                     }
                                 },
                                 "type": "object"
@@ -1715,7 +1728,7 @@
                 }
             }
         },
-        "/digital/api/user-roles/{RoleID}": {
+        "/digital/api/user-roles/{UserID}": {
             "get": {
                 "tags": [
                     "UserRoles"
@@ -1725,7 +1738,7 @@
                 "operationId": "GetUserRole",
                 "parameters": [
                     {
-                        "name": "RoleID",
+                        "name": "UserID",
                         "in": "path",
                         "description": "Id of the role",
                         "required": true,

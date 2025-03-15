@@ -12,7 +12,7 @@ class UserRolesQueryRepository   extends BaseRepository implements UserRolesQuer
         parent::__construct(new UserRole());
     }
     public function getAction($id){
-        return $this->model->where('RoleID', $id)->get();
+        return $this->model->where('UserID', $id)->get();
     }
     public function getActionBy($id, $column){
         return $this->model->where($column, $id)->get();

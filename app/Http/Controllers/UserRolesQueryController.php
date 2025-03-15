@@ -17,7 +17,7 @@ class UserRolesQueryController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/digital/api/user-roles/{RoleID}",
+     *     path="/digital/api/user-roles/{UserID}",
      *     operationId="GetUserRole",
      *     tags={"UserRoles"},
      *     summary="Get a user role",
@@ -25,7 +25,7 @@ class UserRolesQueryController extends Controller
      *     @OA\Parameter (
      *         description="Id of the role",
      *         in="path",
-     *         name="RoleID",
+     *         name="UserID",
      *         required=true,
      *         example=1,
      *         @OA\Schema (
@@ -47,11 +47,11 @@ class UserRolesQueryController extends Controller
      */
     public function show($role_id) : JsonResponse {
         $result = $this->userRoleQuery->getAction($role_id);
-    
+
         if ($result->isEmpty()) {
             return $this->responseError('No data found', 404);
         }
-    
+
         return $this->responseWithData($result);
     }
     /**
@@ -76,5 +76,5 @@ class UserRolesQueryController extends Controller
     public function index() : JsonResponse {
         $result =  $this->userRoleQuery->getAll();
         return $this->responseWithData($result);
-    }    
+    }
 }
