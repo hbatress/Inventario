@@ -33,8 +33,7 @@ class AssetsRequest extends FormRequest
             'StatusID' => 'nullable|exists:statuses,StatusID',
             'ClassificationID' => 'nullable|exists:classifications,ClassificationID',
             'CriticalityID' => 'nullable|exists:criticality_levels,CriticalityID',
-            'ActionID' => 'nullable|exists:actions,ActionID',
-            'CreatedBy' => 'nullable|exists:persons,UserID',
+            'UserID' => 'nullable|exists:persons,UserID',
         ];
     }
 }

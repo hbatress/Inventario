@@ -29,7 +29,7 @@ class AssetsActionController extends Controller
      * *         @OA\MediaType(
      * *             mediaType="multipart/form-data",
      * *             @OA\Schema(
-     * *                 required={"Code", "Name", "TypeID", "LocationID", "DepartmentID", "StatusID", "ClassificationID", "CriticalityID", "CreatedBy"},
+     * *                 required={"Code", "Name", "TypeID", "LocationID", "DepartmentID", "StatusID", "ClassificationID", "CriticalityID", "UserID"},
      * *                 @OA\Property(property="Code", type="string", example="A12345"),
      * *                 @OA\Property(property="Name", type="string", example="Company Laptop"),
      * *                 @OA\Property(property="Description", type="string", example="Dell Latitude 5520 - Business Laptop"),
@@ -41,7 +41,7 @@ class AssetsActionController extends Controller
      * *                 @OA\Property(property="StatusID", type="integer", example=4),
      * *                 @OA\Property(property="ClassificationID", type="integer", example=2),
      * *                 @OA\Property(property="CriticalityID", type="integer", example=3),
-     * *                 @OA\Property(property="CreatedBy", type="integer", example=5),
+     * *                 @OA\Property(property="UserID", type="integer", example=5),
      * *             ),
      * *         ),
      * *     ),
@@ -59,7 +59,7 @@ class AssetsActionController extends Controller
      */
     public function store(AssetsRequest $request) : JsonResponse {
         $validatedData = $request->validated();
-        list($status, $message) = $this->assetAction->create($validatedData);
+        list($status, $message) = $this->assetAction->creacion($validatedData);
         if (!$status) return $this->responseError($message);
         return $this->responseSuccess($message);
     }
@@ -132,7 +132,6 @@ class AssetsActionController extends Controller
      *                 @OA\Property(property="StatusID", type="integer", example=1),
      *                 @OA\Property(property="ClassificationID", type="integer", example=1),
      *                 @OA\Property(property="CriticalityID", type="integer", example=1),
-     *                 @OA\Property(property="ActionID", type="integer", example=1),
      *                 @OA\Property(property="UserID", type="integer", example=1),
      *             ),
      *         ),

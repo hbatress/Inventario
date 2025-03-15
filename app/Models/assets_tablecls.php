@@ -12,7 +12,7 @@ class assets_tablecls extends Model
     protected $primaryKey = 'AssetID';
 
     protected $fillable = [
-        'Code', 'Name','Description','Owner','AcquisitionDate', 'TypeID', 'LocationID', 'DepartmentID', 'StatusID', 'ClassificationID', 'CriticalityID', 'ActionID', 'CreatedBy'
+        'Code', 'Name','Description','Owner','AcquisitionDate', 'TypeID', 'LocationID', 'DepartmentID', 'StatusID', 'ClassificationID', 'CriticalityID', 'UserID'
     ];
 
     public function type()
@@ -43,11 +43,6 @@ class assets_tablecls extends Model
     public function criticality()
     {
         return $this->belongsTo(CriticalityLevel::class, 'CriticalityID', 'CriticalityID');
-    }
-
-    public function action()
-    {
-        return $this->belongsTo(Action::class, 'ActionID', 'ActionID');
     }
 
     public function creator()

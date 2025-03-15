@@ -22,8 +22,11 @@ class UsersActionRepository  extends BaseRepository implements UsersActionInterf
             if (isset($data['PasswordHash'])) {
                 $data['PasswordHash'] = bcrypt($data['PasswordHash']);
             }
-            $this->model->create($data);
-            return [true, "Accion Agregada", 200];
+            // Crear y capturar el objeto creado
+            $createdItem = $this->model->create($data);
+            $data=['UserID' => $createdItem->UserID,
+                'Username' => $createdItem->Username];
+            return [true, $data, 200];
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return [false, "Internal Server Error", 500, null];

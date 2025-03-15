@@ -340,7 +340,7 @@
                                     "StatusID",
                                     "ClassificationID",
                                     "CriticalityID",
-                                    "CreatedBy"
+                                    "UserID"
                                 ],
                                 "properties": {
                                     "Code": {
@@ -388,7 +388,7 @@
                                         "type": "integer",
                                         "example": 3
                                     },
-                                    "CreatedBy": {
+                                    "UserID": {
                                         "type": "integer",
                                         "example": 5
                                     }
@@ -512,10 +512,6 @@
                                         "example": 1
                                     },
                                     "CriticalityID": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "ActionID": {
                                         "type": "integer",
                                         "example": 1
                                     },
